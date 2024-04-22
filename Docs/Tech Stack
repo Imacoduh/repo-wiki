@@ -1,0 +1,86 @@
+Technology Stack
+1. Frontend:
+Framework: Next.js (React-based framework)
+Styling: Tailwind CSS
+State Management: Redux or Context API for React
+2. Backend:
+Server Environment: Node.js
+Framework: Express.js
+Database: MongoDB with Mongoose for object modeling
+3. AI/ML Components:
+NLP & Content Generation: OpenAI's GPT-3 via the OpenAI API
+Alternative for Open Source: Hugging Face's Transformers library for NLP tasks, leveraging models like DistilBERT for content generation and analysis
+4. DevOps:
+Version Control: Git with GitHub
+CI/CD: GitHub Actions
+Hosting: Vercel (Frontend), Heroku or AWS Elastic Beanstalk (Backend)
+System Architecture Design
+The architecture of RepoWiki is designed to be modular, scalable, and maintainable, with a clear separation between the frontend, backend, and AI/ML components.
+Frontend Architecture
+Directory Structure:
+pages/: Contains page components for Next.js routing.
+components/: Reusable UI components.
+styles/: Tailwind configuration and custom CSS.
+store/: Redux store or Context providers for state management.
+Key Technologies:
+Next.js for SSR (Server-Side Rendering) and SSG (Static Site Generation) capabilities.
+Tailwind CSS for utility-first styling.
+Backend Architecture
+Directory Structure:
+routes/: Express routes for handling API requests.
+models/: Mongoose schemas for database models.
+controllers/: Business logic for processing requests.
+middleware/: Express middleware for authentication, logging, etc.
+Key Technologies:
+Node.js and Express.js for a lightweight, efficient server.
+MongoDB with Mongoose for flexible, schema-based data storage.
+AI/ML Integration
+Usage:
+Integrate GPT-3 for dynamic content creation and updates.
+Use Hugging Face's Transformers for tasks not covered by GPT-3 or as an open-source alternative.
+Implementation:
+Create a separate module or service for handling AI/ML requests to encapsulate the logic and make it reusable across the application.
+
+
+Commands and File Examples
+
+Initializing the Project
+1. Frontend Initialization:
+            npx create-next-app@latest frontend
+            cd frontend
+            npm install tailwindcss@latest postcss@latest autoprefixer@latest --save-dev
+            npx tailwindcss init -p
+2. Backend Initialization:
+            mkdir backend && cd backend
+            npm init -y
+            npm install express mongoose dotenv
+3. AI/ML Setup:
+For GPT-3, you'll primarily be interacting with the OpenAI API, so no initial setup in your codebase is required other than securing API keys.
+For Hugging Face Transformers:
+            pip install transformers
+
+
+Sample File: Backend Express Setup
+File: backend/server.js
+            const express = require('express');
+            const mongoose = require('mongoose');
+            require('dotenv').config();
+
+            const app = express();
+            const PORT = process.env.PORT || 5000;
+
+            app.use(express.json());
+
+            // MongoDB Connection
+            mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+                .then(() => console.log('MongoDB Connected'))
+                .catch(err => console.log(err));
+
+            app.get('/', (req, res) => res.send('RepoWiki Backend Running'));
+
+            app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+            
+Environment Variables:
+Create a .env file in the backend directory to store sensitive information like your MongoDB URI.
+This step sets the foundation for RepoWiki's development, focusing on a modern, open-source stack that balances performance, scalability, and developer experience.
